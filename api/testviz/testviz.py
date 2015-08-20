@@ -15,4 +15,5 @@ def index():
   runs = Run.query.all()
   return render_template('index.html', runs = runs)
 
-app.run(debug=True)
+if __name__ == '__main__':
+  app.run(debug=True)
