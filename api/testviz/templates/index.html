@@ -1,0 +1,21 @@
+<!DOCTYPE>
+
+<html>
+  <head>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="src/js/load_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/app.css">
+  </head>
+  <body>
+    <h1>Dashboard</h1>
+    <ol>
+      {% for run in runs %}
+      <li class="build-item">
+      <span class="name">{{ run.id }}</span>
+      <span class="success-rate">{{ run.success_percentage() }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </body>
+</html>
+
