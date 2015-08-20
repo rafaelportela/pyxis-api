@@ -11,8 +11,11 @@
     <ol>
       {% for run in runs %}
       <li class="build-item">
-      <span class="name">{{ run.id }}</span>
-      <span class="success-rate">{{ run.success_percentage() }}</span>
+      <div class="name">{{ run.id }}</div>
+      <div class="success-wrapper">
+        <div class="success-rate">{{ run.success_percentage() }}</div>
+        <div class="text">success rate</div>
+      </div>
       </li>
       {% endfor %}
     </ol>
