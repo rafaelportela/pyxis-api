@@ -12,7 +12,7 @@ init_db()
 
 @app.route('/')
 def index():
-  runs = Run.query.all()
+  runs = Run.query.limit(5).all()
   return render_template('index.html', runs = runs)
 
 if __name__ == '__main__':
