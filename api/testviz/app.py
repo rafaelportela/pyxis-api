@@ -15,11 +15,4 @@ def index():
   runs = Run.query.all()
   return render_template('index.html', runs = runs)
 
-@app.route('/db')
-def database():
-  if db.session.query("1").from_statement("SELECT 1").all():
-    return 'It works.'
-  else:
-    return 'Something is broken.'
-
 app.run(debug=True)
