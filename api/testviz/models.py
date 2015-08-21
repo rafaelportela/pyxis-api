@@ -22,3 +22,6 @@ class Run(Base):
     percent =  (self.passes / float(total)) * 100
     truncated = int(percent)
     return truncated
+
+  def serialize(self):
+    return { 'id': self.id, 'success_percentage': self.success_percentage() }
