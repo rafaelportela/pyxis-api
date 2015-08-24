@@ -2,7 +2,7 @@ import unittest
 import pdb
 import testviz
 
-test_database_url = 'mysql://dashboard:password@192.168.33.42/sandbox'
+test_database_url = 'mysql://dashboard:password@192.168.33.42/sandbox_test'
 
 class RunsApi(unittest.TestCase):
   def setUp(self):

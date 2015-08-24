@@ -7,11 +7,10 @@ import os
 
 app = Flask(__name__)
 
+database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox_test')
+
 from database import init_db
 from models import Run
-
-database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox')
-init_db(database_url)
 
 @app.route('/')
 def index():
@@ -26,4 +25,5 @@ def runs():
   return Response(json.dumps(data), status=200, mimetype="application/json")
 
 if __name__ == '__main__':
+  init_db(database_url)
   app.run(debug=True, host=os.getenv('HOST', 'localhost'))
