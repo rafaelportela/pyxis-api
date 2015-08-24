@@ -26,4 +26,5 @@ def runs():
 
 if __name__ == '__main__':
   init_db(database_url)
+  from database import db_session
   app.run(debug=True, host=os.getenv('HOST', 'localhost'))
