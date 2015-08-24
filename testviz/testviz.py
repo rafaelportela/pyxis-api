@@ -8,10 +8,10 @@ import os
 app = Flask(__name__)
 
 from database import init_db
-from database import db_session
 from models import Run
 
-init_db()
+database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox')
+init_db(database_url)
 
 @app.route('/')
 def index():
