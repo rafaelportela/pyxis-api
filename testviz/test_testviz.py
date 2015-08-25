@@ -6,7 +6,7 @@ from models import Run
 
 test_database_url = 'mysql://dashboard:password@192.168.33.42/sandbox_test'
 
-class RunsApi(unittest.TestCase):
+class RunsApiTestCase(unittest.TestCase):
 
   def setUp(self):
     self.app = testviz.app.test_client()
