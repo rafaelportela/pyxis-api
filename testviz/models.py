@@ -29,3 +29,15 @@ class Run(Base):
         'passes': self.passes,
         'fails': self.fails,
         'skips': self.skips }
+
+class Test(Base):
+  __tablename__ = 'tests'
+  id = Column(String, primary_key = True)
+  name = Column('test_id', String(256))
+
+  def __init__(self, id, name):
+    self.id = id
+    self.name = name
+
+  def serialize(self):
+    return { 'id': self.id, 'name': self.name }

@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 from database import init_db
-from models import Run
+from models import Run, Test
 
 @app.route('/')
 def index():
@@ -17,6 +17,13 @@ def runs():
   data = [run.serialize() for run in runs]
 
   return Response(json.dumps(data), status=200, mimetype="application/json")
+
+@app.route('/tests')
+def tests():
+    tests = Test.query.all()
+    data = [test.serialize() for test in tests]
+
+    return Response(json.dumps(data), status=200, mimetype="application/json")
 
 if __name__ == '__main__':
   database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox_test')
