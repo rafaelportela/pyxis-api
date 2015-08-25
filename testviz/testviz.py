@@ -24,7 +24,11 @@ def run(run_id):
   if run is None:
       abort(404)
 
-  return Response(json.dumps(run.serialize()), status=200, mimetype="application/json")
+  data = run.serialize()
+  tests = [testrun.test.serialize() for testrun in run.tests]
+  data['test_cases'] = tests
+
+  return Response(json.dumps(data), status=200, mimetype="application/json")
 
 @app.route('/tests')
 def tests():

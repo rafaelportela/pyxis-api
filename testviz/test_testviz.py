@@ -61,29 +61,20 @@ class RunApiTestCase(unittest.TestCase):
     self.response = app.get('/runs/12343')
     self.assertEquals(self.response.status_code, 404)
 
+  def test_run_has_collection_of_test_cases(self):
+    response = app.get('/runs/1234')
+    run = json.loads(response.data)
+    self.assertEquals(len(run['test_cases']), 1)
+
+  def test_tests_have_name_attribute(self):
+    response = app.get('/runs/1234')
+    run = json.loads(response.data)
+    self.assertEquals(run['test_cases'][0]['name'], 'nice test case')
+
   #def test_run_has_tests_as_sub_resources(self):
     #self.response = app.get('/runs/1234/tests')
     #self.run = json.loads(self.response.data)
     #self.assertEquals(len(self.run['tests']), 1)
-
-
-class TestApiTestCase(unittest.TestCase):
-
-  def setUp(self):
-    clean_db()
-
-    db_session.add(Test('13', 'nice test name'))
-    db_session.commit()
-    self.response = app.get('/tests')
-    self.test = json.loads(self.response.data)[0]
-
-  def test_get_tests(self):
-    self.assertEquals(self.response.status_code, 200)
-
-  def test_tests_have_name_attribute(self):
-    self.assertEquals(self.test['name'], 'nice test name')
-
-
 
 if __name__ == '__main__':
   unittest.main()
