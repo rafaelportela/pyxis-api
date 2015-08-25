@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, json, Response
+from flask import Flask, redirect, render_template, json, Response, abort
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 
@@ -17,6 +17,14 @@ def runs():
   data = [run.serialize() for run in runs]
 
   return Response(json.dumps(data), status=200, mimetype="application/json")
+
+@app.route('/runs/<run_id>')
+def run(run_id):
+  run = Run.query.get(run_id)
+  if run is None:
+      abort(404)
+
+  return Response(json.dumps(run.serialize()), status=200, mimetype="application/json")
 
 @app.route('/tests')
 def tests():

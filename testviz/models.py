@@ -1,5 +1,14 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy.orm import relationship, backref
 from database import Base
+
+class TestRuns(Base):
+  __tablename__ = 'test_runs'
+  id = Column(String, primary_key = True)
+  run_id = Column(Integer, ForeignKey('runs.id'), primary_key=True)
+  test_id = Column(Integer, ForeignKey('tests.id'), primary_key=True)
+  status = Column(String)
+  test = relationship('Test')
 
 class Run(Base):
   __tablename__ = 'runs'
@@ -7,6 +16,7 @@ class Run(Base):
   passes = Column(Integer)
   skips = Column(Integer)
   fails = Column(Integer)
+  tests = relationship('TestRuns')
 
   def __init__(self, id, passes, fails, skips):
     self.id = id
