@@ -8,11 +8,11 @@ class Run(Base):
   skips = Column(Integer)
   fails = Column(Integer)
 
-  def __init__(self, id, passes, skips, fails):
+  def __init__(self, id, passes, fails, skips):
     self.id = id
     self.passes = passes
-    self.skips = skips
     self.fails = fails
+    self.skips = skips
 
   def success_percentage(self):
     if self.passes == 0:
@@ -24,4 +24,8 @@ class Run(Base):
     return truncated
 
   def serialize(self):
-    return { 'id': self.id, 'success_percentage': self.success_percentage() }
+    return { 'id': self.id,
+        'success_percentage': self.success_percentage(),
+        'passes': self.passes,
+        'fails': self.fails,
+        'skips': self.skips }

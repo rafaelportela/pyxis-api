@@ -27,5 +27,15 @@ class RunsApiTestCase(unittest.TestCase):
   def test_runs_have_success_percentage(self):
     self.assertEquals(self.run['success_percentage'], 80)
 
+  def test_runs_have_passes_attribute(self):
+    self.assertEquals(self.run['passes'], 80)
+
+  def test_runs_have_fails_attribute(self):
+    self.assertEquals(self.run['fails'], 12)
+
+  def test_runs_have_skips_attribute(self):
+    self.assertEquals(self.run['skips'], 8)
+
+
 if __name__ == '__main__':
   unittest.main()
