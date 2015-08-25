@@ -21,15 +21,13 @@ class RunsApi(unittest.TestCase):
 
   def test_runs_have_id(self):
     response = self.app.get('/runs')
-    runs = json.loads(response.data)
-    run = runs[0]
+    run = json.loads(response.data)[0]
 
     self.assertEquals(run['id'], '1234')
 
   def test_runs_have_success_percentage(self):
     response = self.app.get('/runs')
-    runs = json.loads(response.data)
-    run = runs[0]
+    run = json.loads(response.data)[0]
 
     self.assertEquals(run['success_percentage'], 80)
 
