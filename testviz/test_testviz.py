@@ -71,10 +71,11 @@ class RunApiTestCase(unittest.TestCase):
     run = json.loads(response.data)
     self.assertEquals(run['test_cases'][0]['name'], 'nice test case')
 
-  #def test_run_has_tests_as_sub_resources(self):
-    #self.response = app.get('/runs/1234/tests')
-    #self.run = json.loads(self.response.data)
-    #self.assertEquals(len(self.run['tests']), 1)
+  def test_run_has_tests_as_sub_resources(self):
+    response = app.get('/runs/1234/test_cases')
+    test_cases = json.loads(response.data)
+    self.assertEquals(len(test_cases), 1)
+    self.assertEquals(test_cases[0]['name'], 'nice test case')
 
 if __name__ == '__main__':
   unittest.main()

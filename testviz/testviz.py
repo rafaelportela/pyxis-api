@@ -30,12 +30,15 @@ def run(run_id):
 
   return Response(json.dumps(data), status=200, mimetype="application/json")
 
-@app.route('/tests')
-def tests():
-    tests = Test.query.all()
-    data = [test.serialize() for test in tests]
+@app.route('/runs/<run_id>/test_cases')
+def test_cases_by_run(run_id):
+  run = Run.query.get(run_id)
+  if run is None:
+    abort(404)
 
-    return Response(json.dumps(data), status=200, mimetype="application/json")
+  data = [testrun.test.serialize() for testrun in run.tests]
+
+  return Response(json.dumps(data), status=200, mimetype="application/json")
 
 if __name__ == '__main__':
   database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox_test')
