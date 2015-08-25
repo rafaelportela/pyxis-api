@@ -1,12 +1,8 @@
-from flask import Flask, redirect
-from flask import render_template
-from flask import json
-from flask import Response
+from flask import Flask, redirect, render_template, json, Response
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-
 
 from database import init_db
 from models import Run
