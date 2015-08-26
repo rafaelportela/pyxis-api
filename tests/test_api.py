@@ -20,7 +20,7 @@ class RunApiTestCase(unittest.TestCase):
     run = Run('1234', 80, 12, 8)
     testruns = TestRuns(status = "success")
     testruns.test = Test(123, 'nice test case')
-    run.tests.append(testruns)
+    run.testruns.append(testruns)
     db.session.add(run)
     db.session.commit()
 

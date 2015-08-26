@@ -14,7 +14,7 @@ class Run(db.Model):
   passes = db.Column(db.Integer)
   skips = db.Column(db.Integer)
   fails = db.Column(db.Integer)
-  tests = db.relationship('TestRuns')
+  testruns = db.relationship('TestRuns')
 
   def __init__(self, id, passes, fails, skips):
     self.id = id
