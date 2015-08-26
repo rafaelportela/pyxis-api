@@ -20,8 +20,8 @@ def run(run_id):
       abort(404)
 
   data = run.serialize()
-  tests = [testrun.test.serialize() for testrun in run.tests]
-  data['test_cases'] = tests
+
+  data['test_cases'] = tests_with_status(run.tests)
 
   return jsonify(data)
 
@@ -31,6 +31,13 @@ def test_cases_by_run(run_id):
   if run is None:
     abort(404)
 
-  data = [testrun.test.serialize() for testrun in run.tests]
+  return jsonify(test_cases = tests_with_status(run.tests))
 
-  return jsonify(test_cases = data)
+def tests_with_status(test_cases_collection):
+  tests = []
+  for testrun in test_cases_collection:
+      single_test_case = testrun.test.serialize()
+      single_test_case['status'] = testrun.status
+      tests.append(single_test_case)
+
+  return tests
