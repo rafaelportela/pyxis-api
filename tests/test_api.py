@@ -1,7 +1,8 @@
 import unittest
 import pdb
 import json
-from testviz import TestRuns, Run, Test, db, app
+from app import app, db
+from app.runs.models import TestRuns, Run, Test
 
 app = app.test_client()
 
