@@ -91,7 +91,4 @@ def test_cases_by_run(run_id):
   return jsonify(test_cases = data)
 
 if __name__ == '__main__':
-  #database_url = os.getenv('DATABASE_URL', 'mysql://dashboard:password@192.168.33.42/sandbox_test')
-  #init_db(database_url)
-  #from database import db_session
   app.run(debug=True, host=os.getenv('HOST', 'localhost'))
