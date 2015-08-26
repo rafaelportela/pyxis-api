@@ -1,20 +1,15 @@
 import unittest
 import pdb
-import testviz
 import json
-from models import Run, Test, TestRuns
+from testviz import TestRuns, Run, Test, db, app
 
-test_database_url = 'mysql://dashboard:password@192.168.33.42/sandbox_test'
-
-app = testviz.app.test_client()
-testviz.init_db(test_database_url)
-from database import db_session
+app = app.test_client()
 
 def clean_db():
   Run.query.delete()
   Test.query.delete()
   TestRuns.query.delete()
-  db_session.commit()
+  db.session.commit()
 
 class RunApiTestCase(unittest.TestCase):
 
@@ -25,8 +20,8 @@ class RunApiTestCase(unittest.TestCase):
     testruns = TestRuns(status = "success")
     testruns.test = Test(123, 'nice test case')
     run.tests.append(testruns)
-    db_session.add(run)
-    db_session.commit()
+    db.session.add(run)
+    db.session.commit()
 
   def test_get_runs_index(self):
     self.response = app.get('/runs')
@@ -75,7 +70,7 @@ class RunApiTestCase(unittest.TestCase):
     response = app.get('/runs/1234/test_cases')
     test_cases = json.loads(response.data)
     self.assertEquals(len(test_cases), 1)
-    self.assertEquals(test_cases[0]['name'], 'nice test case')
+    self.assertEquals(test_cases['test_cases'][0]['name'], 'nice test case')
 
 if __name__ == '__main__':
   unittest.main()
