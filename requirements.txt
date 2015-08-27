@@ -1,6 +1,7 @@
 colorama==0.3.3
 cssselect==0.9.1
 Flask==0.10.1
+Flask-Cors==2.1.0
 Flask-SQLAlchemy==2.0
 funcsigs==0.4
 green==2.0.3
