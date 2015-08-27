@@ -1,4 +1,4 @@
-# testviz
+# Pyxis
 
 A Python/Flask project.
 
@@ -7,5 +7,5 @@ A Python/Flask project.
 You can create a virtual env, install the dependencies, and run the app:
 ```
 pip install -r requirements.txt
-python testviz/testviz.py
+python run.py
 ```
