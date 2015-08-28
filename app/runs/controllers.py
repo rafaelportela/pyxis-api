@@ -8,7 +8,7 @@ def index():
 
 @app.route('/runs')
 def runs():
-  runs = Run.query.all()
+  runs = Run.query.limit(10).all()
   data = [run.serialize() for run in runs]
 
   return jsonify(runs = data)
